@@ -1,0 +1,36 @@
+---
+robots:
+- serial_number: 2
+  name: frank
+  city: Denver
+  state: AL
+  avatar: bitcoin
+  birthdate: '2015-11-16'
+  date_hired: '2015-11-23'
+  department: domination
+- serial_number: 3
+  name: dk;ld
+  city: dfds
+  state: KY
+  avatar: education
+  birthdate: '2015-12-16'
+  date_hired: '2015-12-07'
+  department: domination
+- serial_number: 4
+  name: JP
+  city: Denver
+  state: AL
+  avatar: Narwhal
+  birthdate: '2015-08-11'
+  date_hired: '2015-10-01'
+  department: harvest
+- serial_number: 5
+  name: JP
+  city: Denver
+  state: ID
+  avatar: Narwhal
+  birthdate: '2015-08-11'
+  date_hired: '2015-10-01'
+  department: harvest
+total: 4
+serial_number: 5

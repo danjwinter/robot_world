@@ -1,0 +1,48 @@
+.index-page {
+  background-image: url('/img/bg.jpg')
+}
+
+.portfolio-caption2 {
+  background-color: black;
+}
+
+.portfolio-caption {
+  opacity: 80%;
+}
+
+#portfolio, .portfolio-item, {
+  background-color: gold;
+  border-radius: 55px;
+}
+
+.new-text {
+  color: white;
+}
+
+.dividing-line {
+  padding: 10px;
+}
+
+.department-new {
+  padding-top: 20px;
+}
+
+.department-items {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.old-text {
+  color: black;
+}
+
+.show-agent {
+  margin-left: auto;
+margin-right: auto;
+display: block;
+}
+
+.intro-heading2 {
+  color: white;
+  text-decoration: none;
+}
