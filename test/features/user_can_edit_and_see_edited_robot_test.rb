@@ -19,12 +19,13 @@ class UserCanSeeAndDeleteRobots < FeatureTest
 
     visit '/robots'
 
+    id = RobotWorld.all.last.serial_number
+
     click_link("Reprogram")
-    assert_equal '/robots/1/edit', current_path
+    assert_equal "/robots/#{id}/edit", current_path
     fill_in('robot[name]', with: "Frank")
     fill_in('robot[city]', with: "Atlanta")
     select "Colorado", :from => "robot[state]"
-    # find('robot[state]').find(:xpath, 'option[6]').select_option
     fill_in('robot[avatar]', with: "Narwhal")
     fill_in('robot[birthdate]', with: "04/04/2004")
     fill_in('robot[date_hired]', with: "05/05/2005")

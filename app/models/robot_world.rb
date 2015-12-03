@@ -3,21 +3,26 @@ require 'yaml/store'
 class RobotWorld
   def self.database
     if ENV["RACK_ENV"] == 'test'
-      @database ||= YAML::Store.new("db/robot_world_test")
+      @database ||= Sequel.sqlite("db/robot_world_test.sqlite3")
     else
-      @database ||= YAML::Store.new("db/robot_world")
+      @database ||= Sequel.sqlite("db/robot_world_development.sqlite3")
     end
   end
 
+  def self.database_access
+    database.from(:robots)
+  end
+
   def self.create(robot)
-    database.transaction do
-      database['robots'] ||= []
-      database['total'] ||= 0
-      database['total'] += 1
-      database['serial_number'] ||= 0
-      database['serial_number'] += 1
-      database['robots'] << { "serial_number" => database['serial_number'], "name" => robot[:name], "city" => robot[:city], "state" => robot[:state], "avatar" => robot[:avatar], "birthdate" => robot[:birthdate], "date_hired" => robot[:date_hired], "department" => robot[:department] }
-    end
+    database_access.insert(robot)
+    # database.transaction do
+    #   database['robots'] ||= []
+    #   database['total'] ||= 0
+    #   database['total'] += 1
+    #   database['serial_number'] ||= 0
+    #   database['serial_number'] += 1
+    #   database['robots'] << { "serial_number" => database['serial_number'], "name" => robot[:name], "city" => robot[:city], "state" => robot[:state], "avatar" => robot[:avatar], "birthdate" => robot[:birthdate], "date_hired" => robot[:date_hired], "department" => robot[:department] }
+    # end
   end
 
   def self.raw_robots
@@ -27,6 +32,7 @@ class RobotWorld
   end
 
   def self.all
+    raw_robots = database_access.to_a
     raw_robots.map {|data| Robot.new(data)}
   end
 
@@ -35,27 +41,16 @@ class RobotWorld
   end
 
   def self.find(serial_number)
-    Robot.new(raw_robot(serial_number))
+    data = database_access.where(serial_number: serial_number).to_a.first
+    Robot.new(data)
   end
 
   def self.update(serial_number, robot)
-    database.transaction do
-      target = database['robots'].find {|data| data["serial_number"] == serial_number}
-      target["name"] = robot[:name]
-      target["city"] = robot[:city]
-      target["state"] = robot[:state]
-      target["avatar"] = robot[:avatar]
-      target["birthdate"] = robot[:birthdate]
-      target["date_hired"] = robot[:date_hired]
-      target["department"] = robot[:department]
-    end
+    database_access.where(serial_number: serial_number).update(robot)
   end
 
   def self.delete(serial_number)
-    database.transaction do
-      database['robots'].delete_if {|robot| robot["serial_number"] == serial_number}
-      database['total'] -= 1
-    end
+    database_access.where(serial_number: serial_number).delete
   end
 
   def self.delete_all

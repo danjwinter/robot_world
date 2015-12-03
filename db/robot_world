@@ -40,5 +40,13 @@ robots:
   birthdate: '2015-12-16'
   date_hired: '2015-12-07'
   department: domination
-total: 5
-serial_number: 6
+- serial_number: 7
+  name: maddie
+  city: denver
+  state: AL
+  avatar: unicorn
+  birthdate: '1990-02-20'
+  date_hired: '0001-01-01'
+  department: singularity
+total: 6
+serial_number: 7

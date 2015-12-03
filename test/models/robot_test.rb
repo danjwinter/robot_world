@@ -2,14 +2,14 @@ require_relative '../test_helper'
 
 class RobotTest < Minitest::Test
   def test_it_assigns_attributes_correctly
-    robot = Robot.new({"name"          => "Bob",
-                       "serial_number" => 1,
-                       "city"          => "Denver",
-                       "state"         => "CO",
-                       "avatar"        => "Narwhal",
-                       "birthdate"     => "04/04/2014",
-                       "date_hired"    => "05/05/2015",
-                       "department"    => "domination"})
+    robot = Robot.new({:name          => "Bob",
+                       :serial_number => 1,
+                       :city          => "Denver",
+                       :state         => "CO",
+                       :avatar        => "Narwhal",
+                       :birthdate     => "04/04/2014",
+                       :date_hired    => "05/05/2015",
+                       :department    => "domination"})
 
     assert_equal "Bob", robot.name
     assert_equal 1, robot.serial_number

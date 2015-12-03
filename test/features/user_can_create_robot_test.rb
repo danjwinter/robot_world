@@ -17,9 +17,11 @@ class UserCanCreateRobot < FeatureTest
 
     assert_equal '/robots', current_path
 
-    within('#robot-title-1') do
+    id = RobotWorld.all.last.serial_number
+
+    within("#robot-title-#{id}") do
       assert page.has_content?("Bob")
-      assert page.has_content?("Secret Agent 1")
+      assert page.has_content?("Secret Agent #{id}")
     end
   end
 end

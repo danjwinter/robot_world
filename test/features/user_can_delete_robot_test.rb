@@ -19,9 +19,10 @@ class UserCanDeleteRobots < FeatureTest
 
     visit '/robots'
 
+    id = RobotWorld.all.last.serial_number
     click_button('terminate')
 
     refute page.has_content?("Bob0")
-    refute page.has_css?('#robot-title-1')
+    refute page.has_css?("#robot-title-#{id}")
   end
 end

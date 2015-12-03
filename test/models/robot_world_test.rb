@@ -16,10 +16,11 @@ class RobotWorldTest < Minitest::Test
 
   def test_it_creates_a_robot
     create_robot(1)
-    robot = RobotWorld.find(1)
+    serial = RobotWorld.all.last.serial_number
+    robot = RobotWorld.find(serial)
 
     assert_equal "Bob0", robot.name
-    assert_equal 1, robot.serial_number
+    assert_equal serial, robot.serial_number
     assert_equal "Denver0", robot.city
     assert_equal "CO0", robot.state
     assert_equal "Narwhal0", robot.avatar
@@ -36,24 +37,20 @@ class RobotWorldTest < Minitest::Test
     assert_equal 4, all_bots.count
     assert_equal Array, all_bots.class
     assert_equal [Robot, Robot, Robot, Robot], all_bots.map {|bot| bot.class}
-    assert_equal [1, 2, 3, 4], all_bots.map {|bot| bot.serial_number}
   end
 
   def test_find_returns_correct_robot
     create_robot(3)
 
-    robot1 = RobotWorld.find(1)
-    robot3 = RobotWorld.find(3)
+    robot3 = RobotWorld.all.last
 
-    assert_equal 1, robot1.serial_number
-    assert_equal "Bob0", robot1.name
-    refute_equal "Denver2", robot1.city
-    assert_equal 3, robot3.serial_number
+    assert_equal "Bob2", robot3.name
+    refute_equal "Denver1", robot3.city
     assert_equal "Bob2", robot3.name
   end
 
   def test_update_edits_and_stores_attributes_for_correct_robot
-    create_robot(3)
+    create_robot(1)
     updated_attributes = {:name          => "Frank",
                        :city          => "Atlanta",
                        :state         => "Georgia",
@@ -61,15 +58,22 @@ class RobotWorldTest < Minitest::Test
                        :birthdate     => "04/04/2014",
                        :date_hired    => "05/05/2015",
                        :department    => "domination"}
+    id = RobotWorld.all.last.serial_number
+    RobotWorld.update(id, updated_attributes)
+    robot1 = RobotWorld.find(id)
 
-    RobotWorld.update(1, updated_attributes)
-    robot1 = RobotWorld.find(1)
-    robot2 = RobotWorld.find(2)
 
     refute_equal "Bob0", robot1.name
     assert_equal "Frank", robot1.name
     assert_equal "Atlanta", robot1.city
-    refute_equal "Atlanta", robot2.city
     assert_equal "Georgia", robot1.state
+  end
+
+  def test_it_deletes_a_robot
+    create_robot(3)
+    total = RobotWorld.all.count
+
+    RobotWorld.delete(RobotWorld.all.last.serial_number)
+    assert_equal (total - 1), RobotWorld.all.count
   end
 end
