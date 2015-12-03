@@ -9,9 +9,9 @@ robots:
   date_hired: '2015-11-23'
   department: domination
 - serial_number: 3
-  name: dk;ld
+  name: apple
   city: dfds
-  state: KY
+  state: AL
   avatar: education
   birthdate: '2015-12-16'
   date_hired: '2015-12-07'
@@ -32,5 +32,13 @@ robots:
   birthdate: '2015-08-11'
   date_hired: '2015-10-01'
   department: harvest
-total: 4
-serial_number: 5
+- serial_number: 6
+  name: tim
+  city: dfds
+  state: AL
+  avatar: education
+  birthdate: '2015-12-16'
+  date_hired: '2015-12-07'
+  department: domination
+total: 5
+serial_number: 6
