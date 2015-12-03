@@ -30,7 +30,7 @@
 
 
       <% @robots.each do |robot| %>
-      <div class="col-md-4 col-sm-6 portfolio-item">
+      <div id="robot-title-<%= robot.serial_number %>" class="col-md-4 col-sm-6 portfolio-item">
         <a href="/robots/<%= robot.serial_number %>/edit" class="portfolio-link" data-toggle="modal">
           <div class="portfolio-hover">
             <div class="portfolio-hover-content">
@@ -41,7 +41,7 @@
         </a>
         <div class="portfolio-caption">
           <!-- <div class="portfolio-caption2"> -->
-          <h4>Secret Agent <%= robot.serial_number  %>: <a href="/robots/<%= robot.serial_number %>"><%= robot.name%></a></h4>
+          <h4 >Secret Agent <%= robot.serial_number  %>: <a href="/robots/<%= robot.serial_number %>"><%= robot.name%></a></h4>
           <a href="/robots/<%= robot.serial_number %>/edit">Reprogram</a>
           <form action="/robots/<%= robot.serial_number %>" method="post">
             <input type="hidden" name="_method" value="DELETE">
