@@ -9,12 +9,17 @@ class RobotWorldApp < Sinatra::Base
     erb :index
   end
 
+  get '/mobilization' do
+    erb :mobilization
+  end
+
   get '/robots/new' do
     erb :new
   end
 
   post '/robots' do
     RobotWorld.create(params[:robot])
+
     redirect '/robots'
   end
 

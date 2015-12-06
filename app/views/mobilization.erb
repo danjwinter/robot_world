@@ -1,0 +1,48 @@
+
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">Mobilization Capabilities</h2>
+        <h3 class="section-subheading text-muted">Say The Word</h3>
+      </div>
+    </div>
+    <div class="row new-text">
+      <div class="col-lg-12">
+
+
+
+        <div class="row">
+          <div class="col-md-4 col-sm-6 portfolio-item"> <div class="portfolio-caption">
+            Field Strength: <%=RobotWorld.all.count  %>  |
+            Average Age: <%= RobotWorld.average_age %> </div> </div>
+            <div class="col-md-4 col-sm-6 portfolio-item"> <div class="portfolio-caption">
+              Years Hired:
+              <% RobotWorld.count_in("hired_year").each_pair do |year, count| %>
+              <%= count %> bots(s) Deployed in <%= year %>  <%= "|" unless RobotWorld.count_in("hired_year").count == 1 %>
+              <% end %> </div> </div>
+              <div class="col-md-4 col-sm-6 portfolio-item"> <div class="portfolio-caption">
+                Departments:
+                <% RobotWorld.count_in("department").each_pair do |department, count| %>
+                <%= count %> bot(s) deployed for <%= department %>  |
+                <% end %> </div> </div>
+                <div class="col-md-4 col-sm-6 portfolio-item"> <div class="portfolio-caption">
+                  Cities:
+                  <% RobotWorld.count_in("city").each_pair do |city, count| %>
+                  <%= count %> bot(s) deployed in <%= city %>  |
+                  <% end %> </div> </div>
+                  <div class="col-md-4 col-sm-6 portfolio-item"> <div class="portfolio-caption">
+                    States:
+                    <% RobotWorld.count_in("state").each_pair do |state, count| %>
+                    <%= count %> bot(s) deployed in <%= state %>  |
+                    <% end %> </div> </div>
+
+
+
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>

@@ -1,4 +1,5 @@
 require 'yaml/store'
+require 'pony'
 
 class RobotWorld
   def self.database
@@ -15,6 +16,9 @@ class RobotWorld
 
   def self.create(robot)
     database_access.insert(robot)
+
+
+    Pony.mail({:to => 'dan.j.winter@gmail.com', :subject => "Robot Assembled", :from => 'me@example.com', :body => 'robot created'})
     # database.transaction do
     #   database['robots'] ||= []
     #   database['total'] ||= 0
@@ -59,6 +63,23 @@ class RobotWorld
       database['total'] = 0
       database['serial_number'] = 0
     end
+  end
+
+  def self.average_age
+    today = Date.today
+    all.inject(0) do |sum, robot|
+      age = today.year - robot.dob_year
+      robot.dob_month > today.month || (robot.dob_month >= today.month && robot.dob_day > today.day)? age -= 1 : nil
+      sum + age
+    end / all.count
+  end
+
+  def self.count_in(parameter)
+    counts = Hash.new(0)
+    all.map do |bot|
+      bot.get_stat(parameter)
+    end.each {|year| counts[year] += 1}
+    counts
   end
 end
 
