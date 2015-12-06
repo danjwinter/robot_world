@@ -17,32 +17,30 @@
             Field Strength: <%=RobotWorld.all.count  %>  |
             Average Age: <%= RobotWorld.average_age %> </div> </div>
             <div class="col-md-4 col-sm-6 portfolio-item"> <div class="portfolio-caption">
-              Years Hired:
-              <% RobotWorld.count_in("hired_year").each_pair do |year, count| %>
-              <%= count %> bots(s) Deployed in <%= year %>  <%= "|" unless RobotWorld.count_in("hired_year").count == 1 %>
+              Contract Years:
+              <% RobotWorld.count_in("hired_year").each_with_index do |year_count, index| %>
+              <%= year_count[1] %> bots(s) Deployed in <%= year_count[0] %><%= "," unless RobotWorld.count_in("hired_year").count - 1 == index %>
               <% end %> </div> </div>
               <div class="col-md-4 col-sm-6 portfolio-item"> <div class="portfolio-caption">
                 Departments:
-                <% RobotWorld.count_in("department").each_pair do |department, count| %>
-                <%= count %> bot(s) deployed for <%= department %>  |
+                <% RobotWorld.count_in("department").each_with_index do |department_count, index| %>
+                <%= department_count[1] %> bot(s) deployed for <%= department_count[0] %><%= "," unless RobotWorld.count_in("department").count - 1 == index %>
                 <% end %> </div> </div>
                 <div class="col-md-4 col-sm-6 portfolio-item"> <div class="portfolio-caption">
                   Cities:
-                  <% RobotWorld.count_in("city").each_pair do |city, count| %>
-                  <%= count %> bot(s) deployed in <%= city %>  |
+                  <% RobotWorld.count_in("city").each_with_index do |city_count, index| %>
+                  <%= city_count[1] %> bot(s) deployed in <%= city_count[0] %><%= "," unless RobotWorld.count_in("city").count - 1 == index %>
                   <% end %> </div> </div>
                   <div class="col-md-4 col-sm-6 portfolio-item"> <div class="portfolio-caption">
                     States:
-                    <% RobotWorld.count_in("state").each_pair do |state, count| %>
-                    <%= count %> bot(s) deployed in <%= state %>  |
+                    <% RobotWorld.count_in("state").each_with_index do |state_count, index| %>
+                    <%= state_count[1] %> bot(s) deployed in <%= state_count[0] %><%= "," unless RobotWorld.count_in("state").count - 1 == index %>
                     <% end %> </div> </div>
 
 
 
                   </div>
                 </div>
-              </form>
             </div>
           </div>
-        </div>
       </section>

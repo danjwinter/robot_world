@@ -1,3 +1,6 @@
+require 'pony'
+require 'rubygems'
+
 class RobotWorldApp < Sinatra::Base
 
   get '/' do
@@ -19,7 +22,6 @@ class RobotWorldApp < Sinatra::Base
 
   post '/robots' do
     RobotWorld.create(params[:robot])
-
     redirect '/robots'
   end
 
